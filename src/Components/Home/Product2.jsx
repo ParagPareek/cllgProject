@@ -15,6 +15,7 @@ const Product1 = () => {
   }, []);
   return (
     <>
+    
       <section id="product1" className="section-p1">
         <h2>New Arrivals</h2>
         <p>Summer Collection New Morden Design</p>

@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 
 const Header = () => {
+  const [theme, setTheme] = useState("light-theme");
+  const [demo, setDemo] = useState(true);
+
+  const toggleTheme = () => {
+    if (theme === "dark-theme") {
+      setTheme("light-theme");
+      setDemo(true);
+    } else {
+      setTheme("dark-theme");
+      setDemo(false);
+    }
+  };
+
+  useEffect(() => {
+    document.body.className = theme; // Apply theme to body
+  }, [theme]);
+
   return (
     <>
       <section id="header">
@@ -13,7 +30,6 @@ const Header = () => {
         <div>
           <ul id="navbar">
             <li>
-              {/* <a className="active" href="index.html">Home</a> */}
               <Link className="active nav-link" to={"/"}>
                 HOME
               </Link>
@@ -22,7 +38,6 @@ const Header = () => {
               <Link className="nav-link" to={"/shop/"}>
                 Shop
               </Link>
-              {/* <a href="shop.html">Shop</a> */}
             </li>
             <li>
               <Link className="nav-link" to={"/Blog/"}>
@@ -47,24 +62,24 @@ const Header = () => {
             <a href="#" id="close">
               <i className="fa-solid fa-xmark"></i>
             </a>
+            {demo ? (
+              <i className="ri-sun-fill" onClick={toggleTheme} style={{paddingLeft:"10px",fontSize:"25px"}}></i>
+            ) : (
+              <i className="ri-moon-fill" onClick={toggleTheme} style={{paddingLeft:"10px",fontSize:"25px"}}></i>
+            )}
             <li>
               <Link className="login-btn" to={"/login/"}>
                 Login
               </Link>
             </li>
-            <li style={{padding:"0px"}}>
+            <li style={{ padding: "0px" }}>
               <Link className="login-btn" to={"/signup/"}>
                 SignUp
               </Link>
             </li>
+         
+           
           </ul>
-        </div>
-
-        <div id="mobile">
-          <a href="cart.html">
-            <i className="fa fa-shopping-bag" aria-hidden="true"></i>
-          </a>
-          <i id="bar" className="fas fa-outdent"></i>
         </div>
       </section>
     </>
